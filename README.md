@@ -1,5 +1,7 @@
 # WeChat Group Message Stat
 
+![ws](https://github.com/glrh111/wechat_stat/blob/master/assert/favicon.png)
+
 This repo is intended to collect messages with filter, 
 and export those info.
 
