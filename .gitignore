@@ -1,0 +1,6 @@
+.idea/
+wechat_stat_data/
+
+*.pyc
+*.pyd
+*.pkl
