@@ -129,7 +129,7 @@ class TestDatetimer(unittest.TestCase):
 
 
 def main():
-    bot: Bot = Bot(cache_path=True)
+    bot: Bot = Bot()  # cache_path=True)  TODO auto log in and log out
     bot.enable_puid()
 
     @bot.register(Group)
