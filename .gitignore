@@ -1,5 +1,7 @@
 .idea/
 wechat_stat_data/
+build/
+*.spec
 
 *.pyc
 *.pyd

@@ -5,6 +5,9 @@
 wxpy doc: https://wxpy.readthedocs.io/zh/latest/messages.html
 """
 
+__author__ = "glrh11"
+__license__ = "license-MIT (The 996 Prohibited License)"
+
 import csv
 import os
 import pytz
@@ -12,8 +15,6 @@ from datetime import datetime
 import time
 import unittest
 import traceback
-import pprint
-import string
 
 from wxpy import Bot, Message as WeMessage, Group, User, embed
 
@@ -58,7 +59,6 @@ class Collector(object):
     def do(cls, we_msg: WeMessage) -> Message:
         group: Group = we_msg.sender  #
         from_user: User = we_msg.member  # display_name
-        print("group: ", group.nick_name, "from_user: ", from_user.nick_name)
         return Message(
             t= Datetimer.timestamp_to_beijingtime(1000 * we_msg.raw.get('CreateTime', 0), FORMAT="%Y-%m-%d %H:%M:%S"),
             group_id=group.puid,
@@ -95,7 +95,6 @@ class Stater(object):
         if not os.path.exists(dirname):
             os.mkdir(dirname)
         # filename format(per file every day): ./wechat_stat_data/wechat_stat_2017-04-29.csv
-        print(msg.t, msg.t[:11])
         csv_filename = "./{}/wechat_stat_{}.csv".format(dirname, msg.t[:11])
         cls(csv_filename, msg).stat()
 
@@ -139,12 +138,10 @@ def main():
         # Message.sender 群 Group 对象
         # Message.member 实际发送人 User 对象
         # Message.receive_time 本地接收时间(应该取 create_time 服务端发送时间)  '2019-04-29 10:56:57.200536'  [10]
-        print(we_msg, "\ntext ", we_msg.text, "\nsender ", we_msg.sender, "\nmember", we_msg.member, "\nreceive",
-              we_msg.receive_time)
-
+        # print(we_msg, "\ntext ", we_msg.text, "\nsender ", we_msg.sender, "\nmember", we_msg.member, "\nreceive",
+        #       we_msg.receive_time)
         try:
             msg: Message = Collector.do(we_msg)
-            pprint.pprint(msg)
             Stater.do(msg)
         except Exception:
             traceback.print_exc()
